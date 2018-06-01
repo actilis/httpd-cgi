@@ -1,9 +1,9 @@
-FROM  alpine:3.7
+FROM  alpine:edge
 
 LABEL Vendor="Actilis" \
       Maintener="Francois MICAUX <dok-images@actilis.net>" \
       License=GPLv3 \
-      Version=2018.06-alpine
+      Version=2018.06-alpine-edge
 
 # Installation Apache
 RUN apk add --no-cache apache2 apache2-utils bash supervisor
