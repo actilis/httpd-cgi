@@ -1,0 +1,29 @@
+FROM  alpine:3.7
+
+LABEL Vendor="Actilis" \
+      Maintener="Francois MICAUX <dok-images@actilis.net>" \
+      License=GPLv3 \
+      Version=2018.06-alpine-phpfpm
+
+# Installation Apache
+RUN apk add --no-cache apache2 apache2-utils bash supervisor
+
+# Données à importer (ADD, COPY,...)
+COPY files/var  /var
+COPY files/ep-alpine.sh /httpd-entrypoint.sh  
+
+# Manage permisisons, clean...
+RUN chmod o+x /var /var/www \
+ && chown -R apache.apache /var/www/html \
+ && chmod -R 755 /var/www/html 
+
+# Ports 
+EXPOSE 80
+
+# Volumes
+VOLUME /var/www/html
+VOLUME /var/log/apache2
+
+# Entrypoint does the HTTPD configuration
+ENTRYPOINT ["/httpd-entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
