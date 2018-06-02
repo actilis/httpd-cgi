@@ -38,11 +38,13 @@ DocumentRoot : /var/www/html (Volume), owner "apache.apache"
 
 ENVIRONMENT VARS :
 
-* HTTPD_ENABLE_CGI = true / other : Enable CGI if true
+* HTTPD_ENABLE_CGI = true / other : Enable CGI if true / Disable if other
+
+Default is true, CGI is enabled.
 
 * HTTPD_MPM = prefork / worker / event
 
-Default MPM is prefork.
+Default MPM is event.
 
 If CGI is enabled, depending on MPM, CGI module is :
 - event/worker : mod_cgid

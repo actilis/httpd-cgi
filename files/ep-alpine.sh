@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # MPM (if MPM=event is specified, use it, else use "prefork" as default)
-case "${HTTPD_MPM:=prefork}" in
+case "${HTTPD_MPM:=event}" in
    prefork) ;;
    worker)  sed -i -e '/LoadModule mpm_worker/s/^#//' \
                    -e '/LoadModule mpm_prefork/s/^/#/' \
@@ -24,7 +24,7 @@ sed -i -e '/LoadModule slotmem_shm_module/s/^#//' \
        /etc/apache2/httpd.conf
 
 # Activate CGI if HTTPD_ENABLE_CGI is true
-[ "${HTTPD_ENABLE_CGI:=false}" == true ] && \
+[ "${HTTPD_ENABLE_CGI:=true}" == true ] && \
 sed -i -e '/index\.html$/s/$/ index.sh index.cgi/' \
        -e '/LoadModule cgi/s/#//' \
        -e '/Scriptsock cgisock/s/#//' \

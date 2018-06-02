@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # MPM (if MPM=event is specified, use it, else use "prefork" as default)
-case "${HTTPD_MPM:=prefork}" in
+case "${HTTPD_MPM:=event}" in
    prefork) ;;
    worker)  sed -i -e '/LoadModule mpm_worker/s,^#,,' \
                    -e '/LoadModule mpm_prefork/s,^,#,' \
@@ -25,7 +25,7 @@ sed -i -e '/Options Indexes FollowSymLinks *$/s/$/ ExecCGI/' \
        /etc/httpd/conf/httpd.conf
 
 # Activate CGI if HTTPD_ENABLE_CGI is true
-if [ "${HTTPD_ENABLE_CGI:=false}" == true ] ; then  
+if [ "${HTTPD_ENABLE_CGI:=true}" == true ] ; then  
    sed -i -e '/LoadModule cgi/s,#,,' \
        /etc/httpd/conf.modules.d/01-cgi.conf \
 
