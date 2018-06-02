@@ -16,7 +16,7 @@ case "${HTTPD_MPM:=prefork}" in
 esac
 
 
-# Make Apache tuning on defualt httpd.conf
+# Make Apache tuning on default httpd.conf
 sed -i -e '/LoadModule slotmem_shm_module/s/^#//' \
        -e '/ErrorLog.*error.log/s,logs.*$,"|/usr/sbin/rotatelogs -l -f -c /var/log/apache2/error-%m%d.log 86400",' \
        -e '/CustomLog.*access.log/s,logs/access.log,"|/usr/sbin/rotatelogs -l -f -c /var/log/apache2/access-%m%d.log 86400",' \

@@ -1,0 +1,30 @@
+FROM  centos:7.4.1708
+
+LABEL Vendor="Actilis" \
+      Maintener="Francois MICAUX <dok-images@actilis.net>" \
+      License=GPLv3 \
+      Version=2018.06-alpine
+
+# Installation Apache
+RUN yum -y install epel-release && yum -y install httpd bash supervisor && yum clean all && rm -rf /var/cache/yum
+
+# Données à importer (ADD, COPY,...)
+COPY files/var  /var
+COPY files/ep-centos.sh /httpd-entrypoint.sh  
+
+# Manage permisisons, clean...
+RUN rm -f /etc/httpd/conf.d/welcome.conf \
+ && chmod o+x /var /var/www \
+ && chown -R apache.apache /var/www/html \
+ && chmod -R 755 /var/www/html 
+
+# Ports 
+EXPOSE 80
+
+# Volumes
+VOLUME /var/www/html
+VOLUME /var/log/httpd
+
+# Entrypoint does the HTTPD configuration
+ENTRYPOINT ["/httpd-entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
