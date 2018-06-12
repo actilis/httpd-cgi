@@ -1,9 +1,9 @@
-FROM  centos:latest
+FROM  centos:7.5.1804
 
 LABEL Vendor="Actilis" \
       Maintener="Francois MICAUX <dok-images@actilis.net>" \
       License=GPLv3 \
-      Version=2018.06-alpine
+      Version=2018.06-centos-latest
 
 # Installation Apache
 RUN yum -y install epel-release https://centos7.iuscommunity.org/ius-release.rpm \

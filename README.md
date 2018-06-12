@@ -2,7 +2,9 @@
 
 HTTPD server with CGI support, based on Alpine Linux. 
 
-An image based on CentOS 7.4 is also provided.
+Images based on CentOS 7.5 are also provided.
+- httpd-cgi:centos : with CentOS packages (httpd-2.4.6)
+- httpd-cgi:centos-latest : with IUS packages (httpd-2.4.33+)
 
 Port : tcp/80 (exposed)
 Volume : /var/www/html (DocumentRoot)
@@ -22,13 +24,13 @@ This image is as light as possible.
 
 ## CentOS Image
 
-Based on CentOS-7.4 with packages installed via yum repos base & updates. 
+Based on CentOS:7.5:1804 with packages installed via yum repos base & updates. 
 
 This image is as light as possible.
 
 ## CentOS-latest Image
 
-Based on CentOS:latest with packages installed via yum repos base, updates, and HTTPD from IUS to provide the latest HTTPD version. 
+Based on CentOS:7.5.1804 with packages installed via yum repos base, updates, and HTTPD from IUS to provide the latest HTTPD version. 
 
 This image is as light as possible.
 
